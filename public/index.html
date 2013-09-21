@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="js/lib/underscore-min.js" type='text/javascript'></script>
+<script src="js/lib/jquery-1.9.1.min.js" type='text/javascript'></script>
+<script src="js/lib/backbone-min.js" type='text/javascript'></script>
+<script src="js/lib/bootstrap.min.js" type='text/javascript'></script>
+
+
+<script src="js/views/patView.js" type='text/javascript'></script>
+<script src="js/routerApp.js" type='text/javascript'></script>
+<script src="js/appController.js" type='text/javascript'></script>
+
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<style type="text/css" media="screen">
+body{
+	background-color: #eee;
+	overflow-x: hidden;
+}
+table#appTable{
+	width: 87%;
+	margin: auto;
+	margin-right: auto;
+	font-weight:400;
+	font-size:14px;
+}
+table#appMailsTable{
+	width: 87%;
+	margin: auto;
+	margin-right: auto;
+	font-weight:400;
+	font-size:14px;
+}
+</style>
+<script>
+	
+</script>
+</head>
+<body>
+	<!---<div id='header'>
+		<h1>Mass mailer </h1>
+	</div>----> 
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+			<span class="icon-th-list"></span></a>
+			<a href="#" class="brand">Mass mailer Api</a>
+			<div class="nav-collapse collapse">
+				<ul class="nav pull-right">
+					<li><a >Dr. Tarun</a></li>
+				</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="hero-unit" style="background-color:#fff;">
+		<div class="container">
+			<div class="navbar" style="width: 80%; margin: auto; margin-bottom: 3%;">
+			  <div class="navbar-inner" style='padding:0'>
+				<ul class="nav" style="width:100%">
+				  <li class="active" style="width: 49%; text-align:center;cursor:pointer;"><a id='patientView' style='cursor:pointer;'>Patients</a></li>
+				  <li class="divider-vertical" style='width:0.2%; margin:0;'></li>
+				  <li style="width: 50.5%;text-align:center;cursor:pointer;"><a id='mailView' style='cursor:pointer;'>Sent Mails</a></li>
+				</ul>
+			  </div>
+			</div>
+			<div id='app'>
+				<table id='appTable' class="table table-bordered  table-hover">
+					<thead>
+						<tr style="background-color: #ACACAC;">
+							<th style='width:5%;'></th>
+							<th style='width:30%;'>Name</th>
+							<th style='width:15%;'>Date of Birth</th>
+							<th style='width:30%;'>Email</th>
+							<th style='width:20%;'>Mobile</th>
+						</tr>
+					</thead>
+					<tbody id='appTableBody'>
+					</tbody>
+				</table>
+			</div>
+			
+			<div id='appMails' style='display:none;'>
+				<table id='appMailsTable' class="table table-bordered  table-hover">
+					<thead>
+						<tr style="background-color: #ACACAC;">
+							<th style='width:25%;'>Email</th>
+							<th style='width:25%;'>subject</th>
+							<th style='width:40%;'>body</th>
+							<th style='width:10%;'>Time</th>
+						</tr>
+					</thead>
+					<tbody id='appMailsTableBody'>
+					</tbody>
+				</table>
+			</div>
+			<p style="float:right; margin-right: 6.5%;margin-top: 2%;">
+				<a id='sendMailBtn' class="btn btn-success btn-large" >Send Mail</a>
+			</p>
+			
+			<div id="mailBox" class="modal hide fade" data-backdrop="static" data-keyboard="false" style="color:black; text-decoration:none;white-space:normal; top:8em;">
+				<div class="modal-header" style="text-align:center;  margin:0; padding-bottom:0;border-radius:5px 5px 0px 0px; border-bottom: 1px solid 	rgb(174, 208, 234);background-color: rgb(47, 150, 180);
+				background-image: -moz-linear-gradient(top, #4d90fe, #4787ed);
+				background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#4787ed));
+				background-image: -o-linear-gradient(top, #4d90fe, #4787ed);
+				background-image: linear-gradient(to bottom, #4d90fe, #4787ed);
+				background-repeat: repeat-x; -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px;box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px;">
+				
+					<button type="button" id="closeInstallBox" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 style="margin:0; padding-top:0; padding-bottom:10px; color:#fff;">Mass mailer by Tarun</h4>
+				</div>
+				
+				<div class="modal-body">
+					<p style="text-align:justify;   font-size: 14px;">
+						<input type='text' name='emailIds' value='' style='width:98%;' placeholder='Email with (,) commas'> 
+						<input type='text' name='emailSubj' value='' style='width:98%;' placeholder='Subject'> 
+					</p><p></p>
+					<p style="text-align:justify;  font-size: 14px; ">
+						<textarea id='emailMsg' rows="8" cols="50" style='width:98%;' placeholder="Enter email body here..."></textarea>
+					</p>
+				</div>
+				
+				<div class='modal-footer'>
+					<a  class="btn btn-success" id='yesMailme' style='float:right;'>Send</a>
+					<a  class="btn" id="noMailing" data-dismiss="modal"  style="border-radius:2px; float:left">Cancel</a>
+				</div>
+			</div>  
+		</div>
+	</div>
+	
+
+</body>
+</html>
