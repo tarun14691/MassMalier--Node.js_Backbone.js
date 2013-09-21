@@ -72,7 +72,7 @@ app.post('/sendPatMail',function(req,res){
 		service: "Gmail",
 		auth: {
 			user: "tarunblog",
-			pass: "jovgqvxzrjxrmbuk"
+			pass: "abcPassword"
 		}
 	});
 
